@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const db = require('./queries')
+const migrate = require('./migrations')
 const port = process.env.PORT ?? 5000;
 
 app.use(bodyParser.json())
@@ -23,6 +24,12 @@ app.post('/users', db.createUser)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
 
+// Migrate flaite
+
+app.get('/migrate', migrate.migrateDB)
+app.get('/drop', migrate.dropDB)
+
 app.listen(port, () => {
   console.log(`App running on port ${port}`)
+  console.log((`The database is ${process.env.DB_NAME}`));
 })
