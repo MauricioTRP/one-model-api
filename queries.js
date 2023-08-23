@@ -14,6 +14,9 @@ const pool = new Pool({
 })
 
 
+pool.on('connect', () => { console.log('Conected to DB'); })
+
+
 // Crud Queries
 const getUsers = (_request, response) => {
   pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
