@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const db = require('./queries')
-const port = 5000
+const port = process.env.PORT ?? 5000;
 
 app.use(bodyParser.json())
 app.use(
@@ -12,7 +12,7 @@ app.use(
 )
 
 app.get('/', (request, response) => {
-  response.json({ info: 'Ahora estoy cambiando el mensaje'})
+  response.json({ info: 'Esta es una API básica con CRUD de usuarios, revisa la ruta /users'})
 })
 
 // Users CRUD
